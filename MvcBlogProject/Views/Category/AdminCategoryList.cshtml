@@ -1,0 +1,136 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Category>
+
+@{
+    ViewBag.Title = "AdminCategoryList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{string color = " "; }
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kategori Listesi</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                ID
+                            </th>
+                            <th style="width: 20%">
+                                Kategori Adı
+                            </th>
+                            <th style="width: 30%">
+                                Son  Blog
+                            </th>
+                          
+                            <th style="width: 8%" class="text-center">
+                                Durum
+                            </th>
+
+                            <th style="width: 20%">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model)
+                        {
+                            if (x.CategoryStatus == true)
+                            {
+                                color = "post-category text-white bg-success mb-3";
+                            }
+                            if (x.CategoryStatus == false)
+                            {
+                                color = "post-category text-white bg-warning mb-3";
+                            }
+                            <tr>
+                                <td>@x.CategoryID</td>
+                                <td>@x.CategoryName</td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar" src="/AdminLTE-3.0.4/dist/img/avatar.png">
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar" src="/AdminLTE-3.0.4/dist/img/avatar2.png">
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar" src="/AdminLTE-3.0.4/dist/img/avatar3.png">
+                                        </li>
+                                    </ul>
+                                </td>
+                                
+
+                                <td class="project-state">
+                                    <span class="badge @color">@x.CategoryStatus </span>
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="/Blog/BlogByCategory/@x.CategoryID">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Yazılar
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="/Category/CategoryUpdate/@x.CategoryID">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Düzenle
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" href="/Category/CategoryDelete/@x.CategoryID">
+                                        <i class="fas fa-angry">
+                                        </i>
+                                        Sil
+                                    </a>
+                                    <a class="btn btn-outline-primary btn-sm" href="/Category/CategoryStatusTrue/@x.CategoryID">
+                                        <i class="fas fa-smile-wink">
+                                        </i>
+                                        Aktif
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </section>
+    <button class="btn btn-info" data-toggle="modal" data-target="#Modal1">Yeni Kategori Ekle</button>
+    <div class="modal" id="Modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Yeni Kategori Ekle</h2>
+                </div>
+                <form method="post" action="/Category/AdminCategoryAdd">
+                    <div class="modal-body">
+                        <label>Kategori Adı</label>
+                        <input type="text" name="CategoryName" class="form-control" />
+                        <br />
+                        <label>Kategori Açıklaması</label>
+                        <input type="text" name="CategoryDescription" class="form-control" />
+                        <br />
+                        <button class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EntityLayer.Concrete.About>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('/miniblog/images/img_4.jpg');">
+    <div class="container">
+        <div class="row same-height justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="post-entry text-center">
+                    <h1 class="">Hakkımızda</h1>
+                    <p class="lead mb-4 text-white">Sizler için yüzlerce güncel içerik üreten ekibimizi daha yakından tanımak ister misiniz ?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var x in Model)
+            {
+                <div class="col-md-6 order-md-2">
+                    <img src="@x.AboutImage1" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-5 mr-auto order-md-1">
+                    <h2>Biz Kimiz ?</h2>
+                    <p>@x.AboutContent1</p>
+                    <ul class="ul-check list-unstyled success">
+                        <li>Her gün yepyeni blog yazıları</li>
+                        <li>15'den fazla kategori</li>
+                        <li>Birbirinden güncel içerikler</li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@Html.Action("MeetTheTeam", "About")
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var x in Model)
+            {
+                <div class="col-md-6">
+                    <img src="@x.AboutImage2" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-5 ml-auto">
+                    <h2>Neler Yapıyoruz ?</h2>
+                    <p class="mb-4">@x.AboutContent2</p>
+                    <ul class="ul-check list-unstyled success">
+                        <li>Film ve Dizi Yorumları  </li>
+                        <li>Avusturya'da Viyana ve Salzburg'dan yazılar</li>
+                        <li>Yazılımda Güncel Teknolojiler</li>
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@*@Html.Action("MailSubscribe", "Blog")*@
+@Html.Action("Footer", "About")
